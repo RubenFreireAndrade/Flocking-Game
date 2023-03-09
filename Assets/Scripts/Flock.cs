@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flock : MonoBehaviour
+public class Flock : StateMachine
 {
     public FlockAgent agentPrefab;
     public FlockBehaviour behaviour;
+
+    [HideInInspector] public Roaming roamingState;
+    [HideInInspector] public Chasing chasingState;
 
     List<FlockAgent> agents = new List<FlockAgent>();
 
@@ -25,9 +28,11 @@ public class Flock : MonoBehaviour
     public float timeTillSpawn;
     public float SquareAvoidanceRadius { get { return squareAvoidanceRadius; } }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        roamingState = new Roaming(this);
+        chasingState = new Chasing(this);
+
         timeStart = 0f;
         timeTillSpawn = 2.0f;
 
@@ -44,32 +49,54 @@ public class Flock : MonoBehaviour
         }
     }
 
+    // Start is called before the first frame update
+    // void Start()
+    // {
+    //     roamingState = new Roaming(this);
+    //     chasingState = new Chasing(this);
+
+    //     timeStart = 0f;
+    //     timeTillSpawn = 2.0f;
+
+    //     squareMaxSpeed = maxSpeed * maxSpeed;
+    //     squareNeighbourRadius = neighbourRadius * neighbourRadius;
+    //     squareAvoidanceRadius = squareNeighbourRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
+
+    //     for (int i = 0; i < startingAgentCount; i++)
+    //     {
+    //         FlockAgent newAgent = Instantiate(agentPrefab, Random.insideUnitCircle * startingAgentCount * AgentDensity, Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), transform);
+    //         newAgent.name = "Agent: " + i;
+    //         newAgent.Initialize(this);
+    //         agents.Add(newAgent);
+    //     }
+    // }
+
     // Update is called once per frame
-    void Update()
-    {
-        foreach (FlockAgent agent in agents)
-        {
-            List<Transform> context = GetNearbyObjects(agent);
+    // void Update()
+    // {
+    //     foreach (FlockAgent agent in agents)
+    //     {
+    //         List<Transform> context = GetNearbyObjects(agent);
 
-            // FOR DEMO.
-            //agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
+    //         // FOR DEMO.
+    //         //agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
 
-            Vector2 move = behaviour.CalculateMove(agent, context, this);
-            move *= driveFactor;
+    //         Vector2 move = behaviour.CalculateMove(agent, context, this);
+    //         move *= driveFactor;
 
-            if (move.sqrMagnitude > squareMaxSpeed) move = move.normalized * maxSpeed;
+    //         if (move.sqrMagnitude > squareMaxSpeed) move = move.normalized * maxSpeed;
             
-            agent.Move(move);
-        }
+    //         agent.Move(move);
+    //     }
 
-        timeStart += Time.deltaTime;
+    //     timeStart += Time.deltaTime;
         
-        if (timeStart >= timeTillSpawn)
-        {
-            SpawnAgent();
-            timeStart = 0;
-        }
-    }
+    //     if (timeStart >= timeTillSpawn)
+    //     {
+    //         SpawnAgent();
+    //         timeStart = 0;
+    //     }
+    // }
 
     List<Transform> GetNearbyObjects(FlockAgent agent)
     {
@@ -87,5 +114,10 @@ public class Flock : MonoBehaviour
         FlockAgent newAgent = Instantiate(agentPrefab, Random.insideUnitCircle, Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), transform);
         newAgent.Initialize(this);
         agents.Add(newAgent);
+    }
+
+    protected override BaseState GetInitialState()
+    {
+        return roamingState;
     }
 }
