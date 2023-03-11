@@ -558,7 +558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1554934248}
-  - component: {fileID: 1554934247}
+  - component: {fileID: 1554934249}
   m_Layer: 0
   m_Name: Flock_Blue
   m_TagString: Untagged
@@ -566,27 +566,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1554934247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554934246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f99515fbb0beed4198624ba238f8834, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 6037808276345915008, guid: 38d15aafe9857174db49ea371f62d393, type: 3}
-  behaviour: {fileID: 11400000, guid: 9208266ebeb56e24b82352c70fcc2f2a, type: 2}
-  startingAgentCount: 30
-  driveFactor: 10
-  maxSpeed: 5
-  neighbourRadius: 1.5
-  avoidanceRadiusMultiplier: 0.5
-  timeStart: 0
-  timeTillSpawn: 2
 --- !u!4 &1554934248
 Transform:
   m_ObjectHideFlags: 0
@@ -602,6 +581,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1554934249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554934246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab089647e07b6c47a27c7deb0d39d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentPrefab: {fileID: 6037808276345915008, guid: 38d15aafe9857174db49ea371f62d393, type: 3}
+  behaviour: {fileID: 11400000, guid: 9208266ebeb56e24b82352c70fcc2f2a, type: 2}
+  startingAgentCount: 20
+  driveFactor: 10
+  maxSpeed: 5
+  neighbourRadius: 1.5
+  avoidanceRadiusMultiplier: 0.5
+  timeStart: 0
+  timeTillSpawn: 2
 --- !u!1001 &1999808656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -725,7 +725,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2119493620}
-  - component: {fileID: 2119493619}
+  - component: {fileID: 2119493621}
   m_Layer: 0
   m_Name: Flock_Orange
   m_TagString: Untagged
@@ -733,27 +733,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2119493619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2119493618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f99515fbb0beed4198624ba238f8834, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 6037808276345915008, guid: faa835689ba5d6b4ab4adbcb1acaa313, type: 3}
-  behaviour: {fileID: 11400000, guid: 9208266ebeb56e24b82352c70fcc2f2a, type: 2}
-  startingAgentCount: 30
-  driveFactor: 10
-  maxSpeed: 5
-  neighbourRadius: 1.5
-  avoidanceRadiusMultiplier: 0.5
-  timeStart: 0
-  timeTillSpawn: 2
 --- !u!4 &2119493620
 Transform:
   m_ObjectHideFlags: 0
@@ -769,3 +748,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2119493621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119493618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab089647e07b6c47a27c7deb0d39d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentPrefab: {fileID: 6037808276345915008, guid: faa835689ba5d6b4ab4adbcb1acaa313, type: 3}
+  behaviour: {fileID: 11400000, guid: 9208266ebeb56e24b82352c70fcc2f2a, type: 2}
+  startingAgentCount: 20
+  driveFactor: 10
+  maxSpeed: 5
+  neighbourRadius: 1.5
+  avoidanceRadiusMultiplier: 0.5
+  timeStart: 0
+  timeTillSpawn: 2
