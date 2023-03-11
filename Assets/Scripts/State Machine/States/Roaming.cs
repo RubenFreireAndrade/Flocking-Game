@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Roaming : BaseState
 {
-    public Roaming(Flock stateMachine) : base("Roaming", stateMachine) {}
-
-    Flock flock;
+    public Roaming(FlockManager stateMachine) : base("Roaming", stateMachine) {}
 
     public override void Enter()
     {
@@ -19,7 +17,7 @@ public class Roaming : BaseState
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            stateMachine.ChangeState(((Flock) stateMachine).chasingState);
+            stateMachine.ChangeState(((FlockManager) stateMachine).chasingState);
         }
     }
 }

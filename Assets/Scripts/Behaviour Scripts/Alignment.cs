@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behaviour/Alignment")]
 public class Alignment : FilteredFlock
 {
-    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
+    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockManager flock)
     {
         if (context.Count == 0) return agent.transform.up;
 

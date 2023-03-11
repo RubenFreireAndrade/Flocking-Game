@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class FlockAgent : MonoBehaviour
 {
-    Flock agentFlock;
-    public Flock AgentFlock { get { return agentFlock; } }
+    FlockManager agentFlock;
+    public FlockManager AgentFlock { get { return agentFlock; } }
 
     Collider2D agentCollider;
     public Collider2D AgentCollider { get { return agentCollider; } }
@@ -18,7 +18,7 @@ public class FlockAgent : MonoBehaviour
         agentCollider = GetComponent<Collider2D>();
     }
 
-    public void Initialize(Flock flock)
+    public void Initialize(FlockManager flock)
     {
         agentFlock = flock;
     }

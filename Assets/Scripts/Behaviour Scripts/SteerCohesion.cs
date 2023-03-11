@@ -8,7 +8,7 @@ public class SteerCohesion : FilteredFlock
     Vector2 currentVelocity;
     public float agentSmoothTime = 0.5f;
 
-    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
+    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockManager flock)
     {
         if (context.Count == 0) return Vector2.zero;
 
