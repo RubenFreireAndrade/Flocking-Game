@@ -81,7 +81,7 @@ public class FlockManager : StateMachine
         }
     }
 
-    List<Transform> GetNearbyObjects(FlockAgent agent)
+    private List<Transform> GetNearbyObjects(FlockAgent agent)
     {
         List<Transform> context = new List<Transform>();
         Collider2D[] contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, neighbourRadius);
