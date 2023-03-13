@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D rigidBody;
-
-    private float xInput;
-    private float yInput;
-
     private Vector2 movement;
+    //private Rigidbody2D rigidBody;
 
     [SerializeField] private float moveSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        //rigidBody = GetComponent<Rigidbody2D>();
         moveSpeed = 5.0f;
     }
 
@@ -25,10 +21,12 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
+
+        transform.position += new Vector3(movement.x, movement.y, 0) * moveSpeed * Time.deltaTime;
     }
 
-    private void FixedUpdate() 
-    {
-        rigidBody.MovePosition(rigidBody.position + movement * moveSpeed * Time.fixedDeltaTime);
-    }
+    // private void FixedUpdate() 
+    // {
+    //     rigidBody.MovePosition(rigidBody.position + movement * moveSpeed * Time.fixedDeltaTime);
+    // }
 }

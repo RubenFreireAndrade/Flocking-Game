@@ -23,10 +23,12 @@ public class PlayerRotation : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
         direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+
+        transform.up = direction;
     }
 
-    private void FixedUpdate() 
-    {
-        rigidBody.transform.up = direction;
-    }
+    // private void FixedUpdate() 
+    // {
+    //     rigidBody.transform.up = direction;
+    // }
 }
