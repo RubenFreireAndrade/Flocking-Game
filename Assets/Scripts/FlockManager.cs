@@ -6,6 +6,7 @@ public class FlockManager : StateMachine
 {
     public FlockAgent agentPrefab;
     public FlockBehaviour behaviour;
+    public GameObject player;
 
     [HideInInspector] public Roaming roamingState;
     [HideInInspector] public Chasing chasingState;
@@ -59,17 +60,24 @@ public class FlockManager : StateMachine
 
         foreach (FlockAgent agent in agents)
         {
-            List<Transform> context = GetNearbyObjects(agent);
+            if (!player.activeInHierarchy)
+            {
+                List<Transform> context = GetNearbyObjects(agent);
 
-            // FOR DEMO.
-            //agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
+                // FOR DEMO.
+                //agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
 
-            Vector2 move = behaviour.CalculateMove(agent, context, this);
-            move *= driveFactor;
+                Vector2 move = behaviour.CalculateMove(agent, context, this);
+                move *= driveFactor;
 
-            if (move.sqrMagnitude > squareMaxSpeed) move = move.normalized * maxSpeed;
-            
-            agent.Move(move);
+                if (move.sqrMagnitude > squareMaxSpeed) move = move.normalized * maxSpeed;
+                
+                agent.Move(move);
+            }
+            else
+            {
+                
+            }
         }
 
         timeStart += Time.deltaTime;
@@ -103,4 +111,10 @@ public class FlockManager : StateMachine
     {
         return roamingState;
     }
+
+    // private void OnGUI()
+    // {
+    //     string content = currentState != null ? currentState.stateName : "{no current state}";
+    //     GUILayout.Label($"<color='white'><size=40>{content}</size></color>");
+    // }
 }

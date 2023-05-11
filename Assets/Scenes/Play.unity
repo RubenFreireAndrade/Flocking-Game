@@ -721,6 +721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 6037808276345915008, guid: 38d15aafe9857174db49ea371f62d393, type: 3}
   behaviour: {fileID: 11400000, guid: 9208266ebeb56e24b82352c70fcc2f2a, type: 2}
+  player: {fileID: 6037808276345915009, guid: f47fecd366b1b5445b5fe789292c3343, type: 3}
   startingAgentCount: 20
   driveFactor: 10
   maxSpeed: 5
@@ -893,6 +894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 6037808276345915008, guid: faa835689ba5d6b4ab4adbcb1acaa313, type: 3}
   behaviour: {fileID: 11400000, guid: 9208266ebeb56e24b82352c70fcc2f2a, type: 2}
+  player: {fileID: 6037808276345915009, guid: f47fecd366b1b5445b5fe789292c3343, type: 3}
   startingAgentCount: 20
   driveFactor: 10
   maxSpeed: 5

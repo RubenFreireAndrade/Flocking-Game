@@ -6,13 +6,11 @@ public class PlayerRotation : MonoBehaviour
 {
     private Vector2 direction;
     private Vector2 mousePosition;
-    private Rigidbody2D rigidBody;
 
     private float rotationSpeed;
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
         rotationSpeed = 2f;
     }
 
@@ -26,9 +24,4 @@ public class PlayerRotation : MonoBehaviour
 
         transform.up = direction;
     }
-
-    // private void FixedUpdate() 
-    // {
-    //     rigidBody.transform.up = direction;
-    // }
 }
