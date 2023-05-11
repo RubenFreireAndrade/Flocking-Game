@@ -10,6 +10,9 @@ public class SteerCohesion : FilteredFlock
 
     public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockManager flock)
     {
+        // Player is not needed here.
+        //player = null;
+        
         if (context.Count == 0) return Vector2.zero;
 
         Vector2 cohesionMove = Vector2.zero;

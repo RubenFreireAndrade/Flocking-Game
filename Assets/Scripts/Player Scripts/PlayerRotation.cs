@@ -7,11 +7,10 @@ public class PlayerRotation : MonoBehaviour
     private Vector2 direction;
     private Vector2 mousePosition;
 
-    private float rotationSpeed;
     // Start is called before the first frame update
     void Start()
     {
-        rotationSpeed = 2f;
+        
     }
 
     // Update is called once per frame

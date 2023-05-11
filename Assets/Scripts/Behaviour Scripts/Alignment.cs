@@ -7,6 +7,9 @@ public class Alignment : FilteredFlock
 {
     public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockManager flock)
     {
+        // Player is not needed here.
+        //player = null;
+
         if (context.Count == 0) return agent.transform.up;
 
         Vector2 alignmentMove = Vector2.zero;

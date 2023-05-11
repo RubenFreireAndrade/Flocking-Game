@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlockManager : StateMachine
+public class FlockManager : MonoBehaviour
 {
     public FlockAgent agentPrefab;
     public FlockBehaviour behaviour;
-    public GameObject player;
-
-    [HideInInspector] public Roaming roamingState;
-    [HideInInspector] public Chasing chasingState;
+    public GameObject playerObj;
 
     List<FlockAgent> agents = new List<FlockAgent>();
 
@@ -21,22 +18,19 @@ public class FlockManager : StateMachine
     [Range(1f, 10f)] public float neighbourRadius = 1.5f;
     [Range(0f, 1f)] public float avoidanceRadiusMultiplier = 0.5f;
 
-    float squareMaxSpeed;
-    float squareNeighbourRadius;
-    float squareAvoidanceRadius;
+    private float squareMaxSpeed;
+    private float squareNeighbourRadius;
+    private float squareAvoidanceRadius;
+    private string currentFlockState;
+    //private bool isPlayerActive = false;
 
     public float timeStart;
     public float timeTillSpawn;
     public float SquareAvoidanceRadius { get { return squareAvoidanceRadius; } }
 
     // Start is called before the first frame update
-    protected override void Start()
+    void Start()
     {
-        roamingState = new Roaming(this);
-        chasingState = new Chasing(this);
-
-        base.Start();
-
         timeStart = 0f;
         timeTillSpawn = 2.0f;
 
@@ -54,14 +48,14 @@ public class FlockManager : StateMachine
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
-        base.Update();
-
-        foreach (FlockAgent agent in agents)
+        if (playerObj.gameObject.activeInHierarchy == false)
         {
-            if (!player.activeInHierarchy)
+            foreach (FlockAgent agent in agents)
             {
+                currentFlockState = "Roaming";
+
                 List<Transform> context = GetNearbyObjects(agent);
 
                 // FOR DEMO.
@@ -74,10 +68,10 @@ public class FlockManager : StateMachine
                 
                 agent.Move(move);
             }
-            else
-            {
-                
-            }
+        }
+        else
+        {
+            currentFlockState = "Chasing Player";
         }
 
         timeStart += Time.deltaTime;
@@ -107,14 +101,8 @@ public class FlockManager : StateMachine
         agents.Add(newAgent);
     }
 
-    protected override BaseState GetInitialState()
+    private void OnGUI()
     {
-        return roamingState;
+        GUILayout.Label($"<color='white'><size=40>{currentFlockState}</size></color>");
     }
-
-    // private void OnGUI()
-    // {
-    //     string content = currentState != null ? currentState.stateName : "{no current state}";
-    //     GUILayout.Label($"<color='white'><size=40>{content}</size></color>");
-    // }
 }
