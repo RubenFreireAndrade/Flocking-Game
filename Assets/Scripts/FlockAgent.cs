@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
+//[RequireComponent(typeof(Collider2D))]
 
 public class FlockAgent : MonoBehaviour
 {
@@ -23,9 +23,16 @@ public class FlockAgent : MonoBehaviour
         agentFlock = flock;
     }
 
-    public void Move(Vector2 velocity)
+    public Vector2 Move(Vector2 velocity)
     {
         transform.up = velocity;
-        transform.position += (Vector3)velocity * Time.deltaTime;
+        return transform.position += (Vector3)velocity * Time.deltaTime;
+    }
+
+    public void MoveToPlayer(Vector2 velocity, GameObject playerTarget)
+    {
+        transform.up = velocity;
+        transform.position = Vector2.MoveTowards(transform.position, playerTarget.transform.position, (velocity.x * velocity.y) * Time.deltaTime);
+        //playerObj.transform.position += (Vector3)velocity * Time.deltaTime;
     }
 }

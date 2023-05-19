@@ -6,6 +6,7 @@ public class FlockManager : MonoBehaviour
 {
     public FlockAgent agentPrefab;
     public FlockBehaviour behaviour;
+    public ShowProximity showProximity;
     public GameObject playerObj;
 
     List<FlockAgent> agents = new List<FlockAgent>();
@@ -22,7 +23,7 @@ public class FlockManager : MonoBehaviour
     private float squareNeighbourRadius;
     private float squareAvoidanceRadius;
     private string currentFlockState;
-    //private bool isPlayerActive = false;
+    private Color originFlockColor;
 
     public float timeStart;
     public float timeTillSpawn;
@@ -44,6 +45,7 @@ public class FlockManager : MonoBehaviour
             newAgent.name = "Agent: " + i;
             newAgent.Initialize(this);
             agents.Add(newAgent);
+            originFlockColor = newAgent.GetComponentInChildren<SpriteRenderer>().color;
         }
     }
 
@@ -52,14 +54,22 @@ public class FlockManager : MonoBehaviour
     {
         if (playerObj.gameObject.activeInHierarchy == false)
         {
+            currentFlockState = "Roaming";
+
             foreach (FlockAgent agent in agents)
             {
-                currentFlockState = "Roaming";
-
+                //Debug.Log(originFlockColor);
                 List<Transform> context = GetNearbyObjects(agent);
 
                 // FOR DEMO.
-                //agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
+                if (!showProximity.GetIsShowProximityPressed())
+                {
+                    agent.GetComponentInChildren<SpriteRenderer>().color = originFlockColor;
+                }
+                else
+                {
+                    agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
+                }
 
                 Vector2 move = behaviour.CalculateMove(agent, context, this);
                 move *= driveFactor;
@@ -68,10 +78,35 @@ public class FlockManager : MonoBehaviour
                 
                 agent.Move(move);
             }
+
         }
         else
         {
             currentFlockState = "Chasing Player";
+
+            foreach (FlockAgent agent in agents)
+            {
+                List<Transform> context = GetNearbyObjects(agent);
+
+                // FOR DEMO.
+                if (!showProximity.GetIsShowProximityPressed())
+                {
+                    agent.GetComponentInChildren<SpriteRenderer>().color = originFlockColor;
+                }
+                else
+                {
+                    agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
+                }
+
+                Vector2 move = behaviour.CalculateMove(agent, context, this);
+
+                move *= driveFactor;
+
+                if (move.sqrMagnitude > squareMaxSpeed) move = move.normalized * maxSpeed;
+                
+                //agent.MoveToPlayer(move, playerObj);
+                agent.Move(move);
+            }
         }
 
         timeStart += Time.deltaTime;
@@ -104,5 +139,16 @@ public class FlockManager : MonoBehaviour
     private void OnGUI()
     {
         GUILayout.Label($"<color='white'><size=40>{currentFlockState}</size></color>");
+    }
+
+    public void ShowProximity()
+    {
+        // FOR DEMO.
+        //agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
+    }
+
+    public void SetFlockSpeed(float newSpeed)
+    {
+        maxSpeed = newSpeed;
     }
 }

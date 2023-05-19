@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class BulletMovement : MonoBehaviour
 {
-    Rigidbody2D rigidBody;
-
     public float moveSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
         moveSpeed = 5.0f;
     }
 
@@ -21,8 +18,12 @@ public class BulletMovement : MonoBehaviour
         transform.Translate(Vector2.up * moveSpeed * Time.deltaTime);
     }
 
-    // void FixedUpdate() 
-    // {
-    //     rigidBody.MovePosition(Vector2.up * moveSpeed * Time.fixedDeltaTime);
-    // }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Flock"))
+        {
+            other.gameObject.SetActive(false);
+            Debug.Log("Hitting Flock");
+        }
+    }
 }
