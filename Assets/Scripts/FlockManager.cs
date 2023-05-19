@@ -19,6 +19,7 @@ public class FlockManager : MonoBehaviour
     [Range(1f, 10f)] public float neighbourRadius = 1.5f;
     [Range(0f, 1f)] public float avoidanceRadiusMultiplier = 0.5f;
 
+    public float newSpeed = 5f;
     private float squareMaxSpeed;
     private float squareNeighbourRadius;
     private float squareAvoidanceRadius;
@@ -74,7 +75,7 @@ public class FlockManager : MonoBehaviour
                 Vector2 move = behaviour.CalculateMove(agent, context, this);
                 move *= driveFactor;
 
-                if (move.sqrMagnitude > squareMaxSpeed) move = move.normalized * maxSpeed;
+                if (move.sqrMagnitude > squareMaxSpeed) move = move.normalized * newSpeed;
                 
                 agent.Move(move);
             }
@@ -102,7 +103,7 @@ public class FlockManager : MonoBehaviour
 
                 move *= driveFactor;
 
-                if (move.sqrMagnitude > squareMaxSpeed) move = move.normalized * maxSpeed;
+                if (move.sqrMagnitude > squareMaxSpeed) move = move.normalized * newSpeed;
                 
                 //agent.MoveToPlayer(move, playerObj);
                 agent.Move(move);
@@ -147,8 +148,8 @@ public class FlockManager : MonoBehaviour
         //agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
     }
 
-    public void SetFlockSpeed(float newSpeed)
+    public void SetFlockSpeed(float speed)
     {
-        maxSpeed = newSpeed;
+        newSpeed = speed;
     }
 }

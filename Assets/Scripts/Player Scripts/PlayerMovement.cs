@@ -22,4 +22,12 @@ public class PlayerMovement : MonoBehaviour
 
         transform.position += new Vector3(movement.x, movement.y, 0) * moveSpeed * Time.deltaTime;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Flock"))
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
 }
