@@ -24,6 +24,9 @@ public class BulletMovement : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             Debug.Log("Hitting Flock");
+
+            this.gameObject.SetActive(false);
+            Debug.Log("Disabling Bullet");
         }
     }
 }

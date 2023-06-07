@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Flock"))
         {
             this.gameObject.SetActive(false);
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }
