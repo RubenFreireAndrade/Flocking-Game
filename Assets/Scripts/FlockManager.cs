@@ -20,15 +20,15 @@ public class FlockManager : MonoBehaviour
     [Range(0f, 1f)] public float avoidanceRadiusMultiplier = 0.5f;
 
     public float newSpeed = 5f;
+    public float timeStart;
+    public float timeTillSpawn;
+    public float SquareAvoidanceRadius { get { return squareAvoidanceRadius; } }
+
     private float squareMaxSpeed;
     private float squareNeighbourRadius;
     private float squareAvoidanceRadius;
     private string currentFlockState;
     private Color originFlockColor;
-
-    public float timeStart;
-    public float timeTillSpawn;
-    public float SquareAvoidanceRadius { get { return squareAvoidanceRadius; } }
 
     // Start is called before the first frame update
     void Start()

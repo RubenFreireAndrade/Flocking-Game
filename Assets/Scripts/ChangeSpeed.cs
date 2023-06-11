@@ -18,8 +18,8 @@ public class ChangeSpeed : MonoBehaviour
         
     }
 
-    public void AdjustSpeed(float newSpeed)
-    {
-        maxSpeed = newSpeed;
-    }
+    // public void AdjustSpeed(float newSpeed)
+    // {
+    //     maxSpeed = newSpeed;
+    // }
 }
